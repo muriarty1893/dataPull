@@ -4,7 +4,7 @@ A modular, well-structured scraper for collecting product details from Trendyol.
 
 ## Dataset Information
 - **Source**: Currently scrapes phones from [Trendyol](https://www.trendyol.com/cep-telefonu-x-c103498?pi=)
-- **Size**: ~2400 records with 50+ columns of detailed specifications
+- **Size**: ~2400 records with 48 columns and 4 metas of detailed specifications 
 - **Output**: CSV format with English column headers and original data values
 
 ## Project Structure
