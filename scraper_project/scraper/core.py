@@ -1,7 +1,3 @@
-"""
-Core module for the scraper.
-Contains the main scraping functionality.
-"""
 import time
 import random
 import requests
@@ -12,15 +8,6 @@ from scraper_project.scraper import reporting
 from scraper_project.scraper import parser
 
 def scrape_product(link_element):
-    """
-    Scrape a single product.
-    
-    Args:
-        link_element: BeautifulSoup object representing a link
-        
-    Returns:
-        dict: Dictionary of product details
-    """
     product_start_time = time.time()
     product_details_dict = {}
     
@@ -29,7 +16,6 @@ def scrape_product(link_element):
         return None, None
     
     try:
-        # Add a small delay to avoid being blocked
         time.sleep(random.uniform(settings.MIN_DELAY, settings.MAX_DELAY))
         
         detail_response = requests.get(link_all, headers=settings.HEADERS)
@@ -47,15 +33,6 @@ def scrape_product(link_element):
     return link_all, product_details_dict
 
 def scrape_page(page_number):
-    """
-    Scrape a single page of products.
-    
-    Args:
-        page_number: Page number to scrape
-        
-    Returns:
-        tuple: (list of scraped products, time taken, number of products)
-    """
     start_time_page = time.time()
     page_data = []
     products_on_page = 0
@@ -76,19 +53,16 @@ def scrape_page(page_number):
                 link_all, product_details_dict = scrape_product(link)
                 
                 if link_all and product_details_dict:
-                    # Create the product data with basic info
                     products_data = {
                         "link": link_all,
                         "brand": product_name_clear,
                         "product": product_name_1_clear,
                     }
                     
-                    # Add all product details as separate columns
                     products_data.update(product_details_dict)
                     
                     page_data.append(products_data)
                     products_on_page += 1
-                    # Create a more comprehensive display format for the product with newlines
                     price_display = product_details_dict.get("Price", "Not available")
                     full_product_info = f"Brand: {product_name_clear}\nModel: {product_name_1_clear}\nPrice: {price_display}"
                     reporting.print_product_scraped(full_product_info)
@@ -103,16 +77,8 @@ def scrape_page(page_number):
     return page_data, page_time, products_on_page
 
 def scrape():
-    """
-    Scrape products from multiple pages.
-    
-    Returns:
-        pandas.DataFrame: DataFrame containing all scraped product data
-    """
-    # Start timing the entire process
     start_time_total = time.time()
     
-    # Stats for timing analysis
     page_times = []
     all_data = []
     product_count = 0
@@ -125,25 +91,19 @@ def scrape():
             page_times.append(page_time)
             product_count += products_on_page
     
-    # Calculate total execution time
     total_execution_time = time.time() - start_time_total
     
-    # Convert to DataFrame and clean up
     df = pd.DataFrame(all_data)
     
-    # Drop the originalPrice column if it exists (it will be empty)
     if 'originalPrice' in df.columns:
         df = df.drop('originalPrice', axis=1)
     
-    # Translate column names from Turkish to English
     column_translations = {
-        # Keep original columns
         'link': 'link',
         'brand': 'brand',
         'product': 'product',
         'Price': 'price',
         
-        # Translate Turkish to English
         'Garanti Tipi': 'warranty_type',
         'Dahili Hafıza': 'internal_storage',
         'RAM Kapasitesi': 'ram_capacity',
@@ -193,12 +153,10 @@ def scrape():
         'Üretici Bilgisi': 'manufacturer_info'
     }
     
-    # Rename columns with English names
     df = df.rename(columns=lambda x: column_translations.get(x, x))
     
     df = df.fillna("")
     
-    # Print timing statistics
     stats = {
         'total_execution_time': total_execution_time,
         'page_times': page_times,

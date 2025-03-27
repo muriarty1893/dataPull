@@ -4,27 +4,21 @@ Contains functions for printing status updates and statistics.
 """
 
 def print_page_start(page_number):
-    """Print a message when starting to process a page."""
     print(f"Processing page {page_number}...")
 
 def print_product_time(time_taken):
-    """Print the time taken to scrape a product."""
-    print(f"Product scraped in {time_taken:.2f} seconds")
+    print(f"  Product scraped in {time_taken:.2f} seconds")
 
 def print_product_scraped(product_name):
-    """Print a message when a product has been scraped."""
-    print(f"---\n{product_name}")
+    print(f"---\n  {product_name}")
 
 def print_page_complete(page_number, time_taken, product_count):
-    """Print a message when a page has been completely processed."""
     print(f"Page {page_number} completed in {time_taken:.2f} seconds. Found {product_count} products.\n")
 
 def print_error_fetching(url, error):
-    """Print an error message when fetching a product fails."""
     print(f"Error fetching details for {url}: {error}")
 
 def print_error_processing_page(page_number, error):
-    """Print an error message when processing a page fails."""
     print(f"Error processing page {page_number}: {error}")
 
 def print_timing_statistics(stats):
@@ -57,5 +51,4 @@ def print_timing_statistics(stats):
     print(f"===========================\n")
 
 def print_save_confirmation(file_path):
-    """Print a confirmation message when data has been saved."""
     print(f"Data saved to {file_path}") 

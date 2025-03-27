@@ -1,14 +1,11 @@
 #!/usr/bin/env python3
-"""
-Main entry point for the scraper application.
-"""
+
 import argparse
 from scraper_project.scraper.core import scrape
 from scraper_project.scraper.utils import save_to_csv, profile_scraper, time_execution
 from scraper_project.scraper.config import settings
 
 def parse_arguments():
-    """Parse command line arguments"""
     parser = argparse.ArgumentParser(description='Scrape product data from Trendyol')
     
     parser.add_argument('--start-page', type=int, default=settings.START_PAGE,
@@ -26,23 +23,19 @@ def parse_arguments():
     return parser.parse_args()
 
 def update_settings(args):
-    """Update settings based on command line arguments"""
     settings.START_PAGE = args.start_page
     settings.END_PAGE = args.end_page
 
 @time_execution
 def main():
-    """Main function"""
     args = parse_arguments()
     update_settings(args)
     
     if args.profile:
         profile_scraper(scrape)
     else:
-        # Run the scraper
         df = scrape()
         
-        # Save the results
         save_to_csv(df, args.output)
     
     return 0
