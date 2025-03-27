@@ -6,9 +6,9 @@ A modular, well-structured scraper for collecting product details from Trendyol.
 
 ```
 /
+├── README.md               # This file
 ├── scraper_project/        # Main project directory
 │   ├── main.py             # Entry point script
-│   ├── README.md           # This file
 │   └── scraper/            # Main package
 │       ├── __init__.py     # Package initializer
 │       ├── core.py         # Core scraping functionality
@@ -18,7 +18,7 @@ A modular, well-structured scraper for collecting product details from Trendyol.
 │       └── config/         # Configuration package
 │           ├── __init__.py # Config package initializer
 │           └── settings.py # Configurable settings
-└── output/                 # Directory for output CSV files (outside the scraper_project)
+└── output/                 # Directory for output CSV files
 ```
 
 ## Features
