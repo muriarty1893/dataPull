@@ -108,6 +108,10 @@ The scraper includes timing utilities to help optimize performance:
 ```bash
 pip install -r requirements.txt
 ```
+or
+```bash
+python3 -m pip install -r requirements.txt
+```
 
 ## Dependencies
 
