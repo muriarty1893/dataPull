@@ -1,6 +1,6 @@
 # Trendyol Product Scraper
 
-Currently Phones (https://www.trendyol.com/cep-telefonu-x-c103498?pi=)
+Currently Phones (https://www.trendyol.com/cep-telefonu-x-c103498?pi=) <br>
 A modular, well-structured scraper for collecting product details from Trendyol.com to be used for machine learning price prediction.
 
 ## Project Structure
