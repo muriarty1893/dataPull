@@ -1,4 +1,4 @@
-# Trendyol Product Scraper
+# Trendyol Product Scraper (Currently Phones)
 
 A modular, well-structured scraper for collecting product details from Trendyol.com to be used for machine learning price prediction.
 
