@@ -7,7 +7,7 @@ def print_page_start(page_number):
     print(f"Processing page {page_number}...")
 
 def print_product_time(time_taken):
-    print(f"  Product scraped in {time_taken:.2f} seconds")
+    print(f"Product scraped in {time_taken:.2f} seconds")
 
 def print_product_scraped(product_name):
     print(f"---\n  {product_name}")
