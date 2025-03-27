@@ -37,7 +37,7 @@ def print_timing_statistics(stats):
     product_count = stats['product_count']
     column_count = stats['column_count']
     
-    print(f"\n===== TIMING STATISTICS =====")
+    print(f"\no========== TIMING STATISTICS ==========O")
     print(f"Total execution time: {total_time:.2f} seconds ({total_time/60:.2f} minutes)")
     
     if page_times:
@@ -48,7 +48,7 @@ def print_timing_statistics(stats):
     
     print(f"Total products scraped: {product_count}")
     print(f"Total columns/properties: {column_count}")
-    print(f"===========================\n")
+    print(f"o=======================================o\n")
 
 def print_save_confirmation(file_path):
     print(f"Data saved to {file_path}") 
