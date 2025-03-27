@@ -1,0 +1,34 @@
+# Configuration settings for the scraper
+
+# Base URL and page range
+BASE_URL = "https://www.trendyol.com/cep-telefonu-x-c103498?pi="
+START_PAGE = 1
+END_PAGE = 2  # Adjust this to scrape more pages
+
+# Request headers to mimic a browser
+HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+}
+
+# Delay settings (to avoid being blocked)
+MIN_DELAY = 0.5
+MAX_DELAY = 1.5
+
+# Output settings
+OUTPUT_FILE = "trendyol_all_data.csv"
+OUTPUT_ENCODING = "utf-8"
+
+# Selectors for HTML parsing
+PRODUCT_WRAPPER_CLASS = "p-card-wrppr with-campaign-view"
+PRODUCT_CARD_BORDER_CLASS = "card-border"
+PRODUCT_DESC_CLASS = "prdct-desc-cntnr"
+PRODUCT_NAME_CLASS = "prdct-desc-cntnr-name hasRatings"
+PRICE_DISCOUNTED_CLASS = "prc-box-dscntd"
+PRICE_SELLING_CLASS = "prc-box-sllng"
+SPECIFICATIONS_CONTAINER_CLASS = "detail-attr-container"
+SPECIFICATION_ITEM_CLASS = "detail-attr-item"
+PRODUCT_FEATURES_CLASS = "product-features"
+FEATURE_CLASS = "product-feature"
+FEATURE_NAME_CLASS = "feature-name"
+FEATURE_VALUE_CLASS = "feature-value"
+PRODUCT_DESCRIPTION_CLASS = "product-description" 
