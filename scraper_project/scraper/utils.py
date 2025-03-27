@@ -2,6 +2,7 @@
 Utilities module for the scraper.
 Contains helper functions.
 """
+
 import os
 import pandas as pd
 import time
