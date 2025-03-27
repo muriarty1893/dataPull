@@ -5,19 +5,20 @@ A modular, well-structured scraper for collecting product details from Trendyol.
 ## Project Structure
 
 ```
-scraper_project/
-├── main.py                  # Entry point script
-├── README.md               # This file
-├── output/                 # Directory for output CSV files
-└── scraper/                # Main package
-    ├── __init__.py         # Package initializer
-    ├── core.py             # Core scraping functionality
-    ├── parser.py           # HTML parsing functions
-    ├── reporting.py        # Functions for printing messages and reports
-    ├── utils.py            # Utility functions
-    └── config/             # Configuration package
-        ├── __init__.py     # Config package initializer
-        └── settings.py     # Configurable settings
+/
+├── scraper_project/        # Main project directory
+│   ├── main.py             # Entry point script
+│   ├── README.md           # This file
+│   └── scraper/            # Main package
+│       ├── __init__.py     # Package initializer
+│       ├── core.py         # Core scraping functionality
+│       ├── parser.py       # HTML parsing functions
+│       ├── reporting.py    # Functions for printing messages and reports
+│       ├── utils.py        # Utility functions
+│       └── config/         # Configuration package
+│           ├── __init__.py # Config package initializer
+│           └── settings.py # Configurable settings
+└── output/                 # Directory for output CSV files (outside the scraper_project)
 ```
 
 ## Features
