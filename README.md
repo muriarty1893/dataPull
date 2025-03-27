@@ -1,13 +1,19 @@
 # Trendyol Product Scraper
 
-A modular, well-structured scraper for collecting product details from Trendyol.com to be used for machine learning price prediction.<br>
-Currently Phones (https://www.trendyol.com/cep-telefonu-x-c103498?pi=) 
+A modular, well-structured scraper for collecting product details from Trendyol.com to be used for machine learning price prediction.
+
+## Dataset Information
+- **Source**: Currently scrapes phones from [Trendyol](https://www.trendyol.com/cep-telefonu-x-c103498?pi=)
+- **Size**: ~2400 records with 50+ columns of detailed specifications
+- **Output**: CSV format with English column headers and original data values
 
 ## Project Structure
 
 ```
 /
-├── README.md               # This file
+├── README.md               # Project documentation
+├── requirements.txt        # Project dependencies
+├── .gitignore              # Git ignore rules
 ├── scraper_project/        # Main project directory
 │   ├── main.py             # Entry point script
 │   └── scraper/            # Main package
@@ -20,6 +26,7 @@ Currently Phones (https://www.trendyol.com/cep-telefonu-x-c103498?pi=)
 │           ├── __init__.py # Config package initializer
 │           └── settings.py # Configurable settings
 └── output/                 # Directory for output CSV files
+    └── trendyol_all_data.csv  # Scraped data output
 ```
 
 ## Features
@@ -29,6 +36,9 @@ Currently Phones (https://www.trendyol.com/cep-telefonu-x-c103498?pi=)
 - Timing and performance measurement tools
 - Command-line interface for flexible usage
 - Error handling and reporting
+- English column headers with original data values
+- Efficiently handles multiple pages
+- CSV format for easy data analysis
 
 ## Usage
 
@@ -58,7 +68,7 @@ python -m scraper_project.main --profile
 
 ## Configuration
 
-You can adjust the following settings in `scraper/config/settings.py`:
+You can adjust the following settings in `scraper_project/scraper/config/settings.py`:
 
 - `BASE_URL`: The base URL to scrape from
 - `START_PAGE`: Default starting page number
@@ -71,16 +81,16 @@ You can adjust the following settings in `scraper/config/settings.py`:
 
 The scraper extracts various product details, including:
 
-- Brand
-- Product name
-- Price
-- Internal storage
-- RAM capacity
-- Screen size
+- Brand and model information
+- Price (in TL)
+- Storage capacity and RAM
+- Screen specifications (size, resolution, technology)
+- Camera details (front/rear, resolution)
 - Battery capacity
-- Other phone specifications
+- Connectivity features (NFC, Bluetooth, etc.)
+- And many other phone specifications
 
-Each feature is stored in its own column, making the data ready for machine learning applications.
+Each feature is stored in its own column with English headers, making the data ready for machine learning applications.
 
 ## Performance Optimization
 
@@ -91,8 +101,17 @@ The scraper includes timing utilities to help optimize performance:
 - Average time per product
 - Detailed profiling with cProfile
 
+## Installation
+
+1. Clone the repository
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
 ## Dependencies
 
-- requests
-- beautifulsoup4
-- pandas 
+- requests >= 2.32.0
+- pandas >= 2.2.0
+- beautifulsoup4 >= 4.12.0
+- bs4 >= 0.0.1
