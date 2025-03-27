@@ -89,7 +89,10 @@ def scrape_page(page_number):
                     
                     page_data.append(products_data)
                     products_on_page += 1
-                    reporting.print_product_scraped(product_name_1_clear)
+                    # Create a more comprehensive display format for the product with newlines
+                    price_display = product_details_dict.get("Price", "Not available")
+                    full_product_info = f"Brand: {product_name_clear}\nModel: {product_name_1_clear}\nPrice: {price_display}"
+                    reporting.print_product_scraped(full_product_info)
     
     except Exception as e:
         reporting.print_error_processing_page(page_number, e)

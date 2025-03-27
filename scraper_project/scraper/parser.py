@@ -35,11 +35,25 @@ def extract_product_info(product):
     product_name_clear = product_name.text.strip() if product_name else None
     product_name_1_clear = product_name_1.text.strip() if product_name_1 else None
     
-    # Extract price
-    product_price = product.find("div", attrs={"class": settings.PRICE_DISCOUNTED_CLASS})
-    if not product_price:
-        product_price = product.find("div", attrs={"class": settings.PRICE_SELLING_CLASS})
-    original_price = product_price.text.strip() if product_price else None
+    # Extract price - try multiple possible price selectors
+    original_price = None
+    # Try common price selectors
+    price_selectors = [
+        ("div", {"class": settings.PRICE_DISCOUNTED_CLASS}),
+        ("div", {"class": settings.PRICE_SELLING_CLASS}),
+        ("div", {"class": "prc-box-dscntd"}),
+        ("div", {"class": "prc-box-sllng"}),
+        ("div", {"class": "product-price"}),
+        ("div", {"class": "pr-bx-w"}),
+        ("span", {"class": "prc-slg"}),
+        ("span", {"class": "prc-dsc"})
+    ]
+    
+    for tag, attrs in price_selectors:
+        price_element = product.find(tag, attrs=attrs)
+        if price_element:
+            original_price = price_element.text.strip()
+            break
     
     # Extract product links
     product_links = product.find_all("div", attrs={"class": settings.PRODUCT_CARD_BORDER_CLASS})
@@ -74,6 +88,21 @@ def parse_product_details(detail_html):
     """
     product_details_dict = {}
     detail_soup = BeautifulSoup(detail_html, "html.parser")
+    
+    # Extract price from the detail page
+    price_selectors = [
+        ("span", {"class": "prc-dsc"}),
+        ("span", {"class": "prc-slg"}),
+        ("div", {"class": "product-price-container"}),
+        ("div", {"class": "pr-bx-w"}),
+        ("div", {"class": "pr-bx-nm with-discount"})
+    ]
+    
+    for tag, attrs in price_selectors:
+        price_element = detail_soup.find(tag, attrs=attrs)
+        if price_element:
+            product_details_dict["Price"] = price_element.text.strip()
+            break
     
     # Get main specifications
     parse_main_specifications(detail_soup, product_details_dict)

@@ -13,7 +13,7 @@ def print_product_time(time_taken):
 
 def print_product_scraped(product_name):
     """Print a message when a product has been scraped."""
-    print(f"Scraped product: {product_name}")
+    print(f"Scraped product: \n  {product_name}")
 
 def print_page_complete(page_number, time_taken, product_count):
     """Print a message when a page has been completely processed."""
