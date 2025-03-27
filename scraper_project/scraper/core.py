@@ -81,7 +81,6 @@ def scrape_page(page_number):
                         "link": link_all,
                         "brand": product_name_clear,
                         "product": product_name_1_clear,
-                        "originalPrice": original_price,
                     }
                     
                     # Add all product details as separate columns
@@ -131,6 +130,72 @@ def scrape():
     
     # Convert to DataFrame and clean up
     df = pd.DataFrame(all_data)
+    
+    # Drop the originalPrice column if it exists (it will be empty)
+    if 'originalPrice' in df.columns:
+        df = df.drop('originalPrice', axis=1)
+    
+    # Translate column names from Turkish to English
+    column_translations = {
+        # Keep original columns
+        'link': 'link',
+        'brand': 'brand',
+        'product': 'product',
+        'Price': 'price',
+        
+        # Translate Turkish to English
+        'Garanti Tipi': 'warranty_type',
+        'Dahili Hafıza': 'internal_storage',
+        'RAM Kapasitesi': 'ram_capacity',
+        'Ekran Boyutu': 'screen_size',
+        'Pil Gücü (mAh)': 'battery_power_mah',
+        'Mobil Bağlantı Hızı': 'mobile_connection_speed',
+        'Ön Kamera Çözünürlüğü': 'front_camera_resolution',
+        'Kamera Çözünürlüğü': 'camera_resolution',
+        'Ön Kamera Sayısı': 'front_camera_count',
+        'Ekran Çözünürlüğü': 'screen_resolution',
+        'Ekran Teknolojisi': 'screen_technology',
+        'Ön Kamera Çözünürlük Aralığı': 'front_camera_resolution_range',
+        'Görüntü Teknolojisi': 'display_technology',
+        'Ana Kamera Flaş': 'main_camera_flash',
+        'Ön Kamera Flaş': 'front_camera_flash',
+        'Ekran Cinsi': 'screen_type',
+        'Arka Kamera Sayısı': 'rear_camera_count',
+        'Ekran Boyut Aralığı': 'screen_size_range',
+        'İşletim Sistemi': 'operating_system',
+        'Çift Hat': 'dual_sim',
+        'Kablosuz Şarj': 'wireless_charging',
+        'Yüz Tanıma': 'face_recognition',
+        'Dokunmatik Ekran': 'touchscreen',
+        'Garanti Süresi': 'warranty_period',
+        'Şarj Girişi': 'charging_port',
+        'Ana Kamera Çözünürlük Aralığı': 'main_camera_resolution_range',
+        'NFC': 'nfc',
+        'Ekran Yenileme Hızı': 'screen_refresh_rate',
+        'Kulaklık Girişi': 'headphone_jack',
+        'Şarj Hızı': 'charging_speed',
+        'Arttırılabilir Hafıza (Hafıza Kartı Desteği)': 'expandable_storage',
+        'Batarya Kapasitesi Aralığı': 'battery_capacity_range',
+        'Parmak İzi Okuyucu': 'fingerprint_reader',
+        'Suya/Toza Dayanıklılık': 'water_dust_resistance',
+        'Renk': 'color',
+        'Yapay Zeka': 'artificial_intelligence',
+        'Video Kayıt Çözünürlüğü': 'video_recording_resolution',
+        'Menşei': 'country_of_origin',
+        'Cep Telefonu Modeli': 'phone_model',
+        'Radio': 'radio',
+        'CPU Aralık': 'cpu_range',
+        'Görüntülü Konuşma': 'video_call',
+        'Kozmetik Durum': 'cosmetic_condition',
+        'Tamir Edilebilirlik': 'repairability',
+        'CE Uygunluk Sembolu': 'ce_compliance',
+        'İthalatçı/ Yetkili Temsilci/ İfa Hizmet Sağlayıcı': 'importer_representative',
+        'Üretici Bilgisi': 'manufacturer_info'
+    }
+    
+    # Rename columns with English names
+    df = df.rename(columns=lambda x: column_translations.get(x, x))
+    
     df = df.fillna("")
     
     # Print timing statistics
