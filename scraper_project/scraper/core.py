@@ -136,7 +136,10 @@ def scrape():
         'Üretici Bilgisi': 'manufacturer_info'
     }
     
-    df = df.rename(columns=lambda x: column_translations.get(x, x))
+    def rename_column(col_name):
+        return column_translations.get(col_name, col_name)
+    
+    df = df.rename(columns=rename_column)
     df = df.fillna("")
     
     stats = {

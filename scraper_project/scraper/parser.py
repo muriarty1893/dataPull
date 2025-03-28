@@ -1,4 +1,3 @@
-import re
 from bs4 import BeautifulSoup
 from scraper_project.scraper.config import settings
 
@@ -104,14 +103,4 @@ def parse_description(soup, details_dict):
     description = soup.find("div", class_=settings.PRODUCT_DESCRIPTION_CLASS)
     if description:
         desc_text = description.text
-        common_specs = [
-            ("RAM", r"RAM:\s*(\d+\s*GB)"),
-            ("Storage", r"Storage:\s*(\d+\s*GB)"),
-            ("Camera", r"Camera:\s*(\d+\s*MP)"),
-            ("Battery", r"Battery:\s*(\d+\s*mAh)")
-        ]
-        
-        for spec_name, pattern in common_specs:
-            match = re.search(pattern, desc_text)
-            if match and spec_name not in details_dict:
-                details_dict[spec_name] = match.group(1) 
+        details_dict["Description"] = desc_text.strip() 
