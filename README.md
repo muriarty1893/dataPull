@@ -4,7 +4,7 @@ A modular, well-structured scraper for collecting product details from Trendyol.
 
 ## Dataset Information
 - **Source**: Currently scrapes phones from [Trendyol](https://www.trendyol.com/cep-telefonu-x-c103498?pi=)
-- **Size**: ~2400 records with 50+ columns of detailed specifications
+- **Size**: 48 features and 4 meta (text) columns with depending number of lines according to your selection of the number pages to pull the data 
 - **Output**: CSV format with English column headers and original data values
 
 ## Project Structure
@@ -24,9 +24,9 @@ A modular, well-structured scraper for collecting product details from Trendyol.
 │       ├── utils.py            # Utility functions
 │       └── config/             # Configuration package
 │           ├── __init__.py     # Config package initializer
-│           └── settings.py     # Configurable settings
-└── output/                     # Directory for output CSV files
-    └── trendyol_all_data.csv   # Scraped data output
+│           └── settings.py     # Configurable settings (don't change the delay numbers!)
+└── output/                     # Directory for output CSV files (created after running the code)
+    └── trendyol_all_data.csv   # Scraped data output (created after running the code)
 ```
 
 ## Features
