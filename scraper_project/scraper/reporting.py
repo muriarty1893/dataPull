@@ -34,7 +34,8 @@ def print_timing_statistics(stats):
     
     print(f"Total products scraped: {product_count}")
     print(f"Total columns/properties: {column_count}")
-    print(f"o=======================================o\n")
+    print(f"o=======================================o")
 
 def print_save_confirmation(file_path):
     print(f"Data saved to {file_path}") 
+    print(f"o=======================================o\n")
