@@ -7,11 +7,8 @@ from scraper_project.scraper.config import settings
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Scrape product data from Trendyol')
-    
     parser.add_argument('--start-page', type=int, default=settings.START_PAGE, help=f'Starting page number (default: {settings.START_PAGE})')
-    
     parser.add_argument('--end-page', type=int, default=settings.END_PAGE, help=f'Ending page number (default: {settings.END_PAGE})')
-    
     parser.add_argument('--output', type=str, default=None, help=f'Output file path (default: output/{settings.OUTPUT_FILE})')
     
     return parser.parse_args()
