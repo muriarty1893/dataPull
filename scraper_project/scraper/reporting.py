@@ -1,8 +1,3 @@
-"""
-Reporting module for the scraper.
-Contains functions for printing status updates and statistics.
-"""
-
 def print_page_start(page_number):
     print(f"Processing page {page_number}...")
 
@@ -10,7 +5,7 @@ def print_product_time(time_taken):
     print(f"Product scraped in {time_taken:.2f} seconds")
 
 def print_product_scraped(product_name):
-    print(f"---\n  {product_name}")
+    print(f"---\n{product_name}")
 
 def print_page_complete(page_number, time_taken, product_count):
     print(f"Page {page_number} completed in {time_taken:.2f} seconds. Found {product_count} products.\n")
@@ -22,16 +17,7 @@ def print_error_processing_page(page_number, error):
     print(f"Error processing page {page_number}: {error}")
 
 def print_timing_statistics(stats):
-    """
-    Print timing statistics.
-    
-    Args:
-        stats (dict): Dictionary containing timing statistics with the following keys:
-            - total_execution_time: Total time taken to run the scraper
-            - page_times: List of times taken for each page
-            - product_count: Total number of products scraped
-            - column_count: Number of columns/properties extracted
-    """
+
     total_time = stats['total_execution_time']
     page_times = stats['page_times']
     product_count = stats['product_count']

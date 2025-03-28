@@ -3,7 +3,7 @@
 A modular, well-structured scraper for collecting product details from Trendyol.com to be used for machine learning price prediction.
 
 ## Dataset Information
-- **Source**: Currently scrapes phones from [Trendyol](https://www.trendyol.com/cep-telefonu-x-c103498?pi=)
+- **Source**: Currently scraped phones from [Trendyol](https://www.trendyol.com/cep-telefonu-x-c103498?pi=)
 - **Size**: ~2400 records with 48 columns and 4 metas of detailed specifications 
 - **Output**: CSV format with English column headers and original data values
 
