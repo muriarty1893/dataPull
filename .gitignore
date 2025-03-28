@@ -1,2 +1,4 @@
 __pycache__/
 !__init__.py 
+combine_csv.py
+output/trendyol_all_data.csv
