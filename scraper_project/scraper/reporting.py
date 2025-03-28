@@ -1,3 +1,7 @@
+import os
+import pandas as pd
+from scraper_project.scraper.config import settings
+
 def print_page_start(page_number):
     print(f"Processing page {page_number}...")
 
@@ -39,3 +43,12 @@ def print_timing_statistics(stats):
 def print_save_confirmation(file_path):
     print(f"Data saved to {file_path}") 
     print(f"o=======================================o\n")
+
+def save_to_csv(df, file_path=None):
+    if file_path is None:
+        output_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'output')
+        os.makedirs(output_dir, exist_ok=True)
+        file_path = os.path.join(output_dir, settings.OUTPUT_FILE)
+    
+    df.to_csv(file_path, encoding=settings.OUTPUT_ENCODING)
+    print_save_confirmation(file_path)

@@ -1,6 +1,8 @@
+#!/usr/bin/env python3
+
 import argparse
 from scraper_project.scraper.core import scrape
-from scraper_project.scraper.utils import save_to_csv
+from scraper_project.scraper.reporting import save_to_csv
 from scraper_project.scraper.config import settings
 
 def parse_arguments():
