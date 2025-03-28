@@ -60,11 +60,8 @@ def parse_product_details(detail_html):
             break
     
     parse_main_specifications(detail_soup, product_details_dict)
-    
     parse_specification_tables(detail_soup, product_details_dict)
-    
     parse_features(detail_soup, product_details_dict)
-    
     parse_description(detail_soup, product_details_dict)
     
     return product_details_dict

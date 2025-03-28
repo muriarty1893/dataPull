@@ -3,8 +3,8 @@
 A modular, well-structured scraper for collecting product details from Trendyol.com to be used for machine learning price prediction.
 
 ## Dataset Information
-- **Source**: Currently scraped phones from [Trendyol](https://www.trendyol.com/cep-telefonu-x-c103498?pi=)
-- **Size**: ~2400 records with 48 columns and 4 metas of detailed specifications 
+- **Source**: Currently scrapes phones from [Trendyol](https://www.trendyol.com/cep-telefonu-x-c103498?pi=)
+- **Size**: ~2400 records with 50+ columns of detailed specifications
 - **Output**: CSV format with English column headers and original data values
 
 ## Project Structure
@@ -93,7 +93,6 @@ The scraper includes timing utilities to help optimize performance:
 - Total execution time
 - Average time per page
 - Average time per product
-- Detailed profiling with cProfile
 
 ## Installation
 
@@ -101,10 +100,6 @@ The scraper includes timing utilities to help optimize performance:
 2. Install dependencies:
 ```bash
 pip install -r requirements.txt
-```
-or
-```bash
-python3 -m pip install -r requirements.txt
 ```
 
 ## Dependencies

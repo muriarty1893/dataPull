@@ -2,7 +2,6 @@ import time
 import random
 import requests
 import pandas as pd
-
 from scraper_project.scraper.config import settings
 from scraper_project.scraper import reporting
 from scraper_project.scraper import parser
@@ -60,7 +59,6 @@ def scrape_page(page_number):
                     }
                     
                     products_data.update(product_details_dict)
-                    
                     page_data.append(products_data)
                     products_on_page += 1
                     price_display = product_details_dict.get("Price", "Not available")
@@ -154,8 +152,7 @@ def scrape():
     }
     
     df = df.rename(columns=lambda x: column_translations.get(x, x))
-    
-    df = df.fillna("")
+    df = df.fillna("") # ------------------------------------------------------------- NaN to empty string
     
     stats = {
         'total_execution_time': total_execution_time,
