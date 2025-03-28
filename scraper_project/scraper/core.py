@@ -14,17 +14,9 @@ def scrape_product(link_element):
     if not link_all:
         return None, None
     
-    try:
-        time.sleep(random.uniform(settings.MIN_DELAY, settings.MAX_DELAY))
-        
-        detail_response = requests.get(link_all, headers=settings.HEADERS)
-        detail_response.raise_for_status()
-        
-        product_details_dict = parser.parse_product_details(detail_response.content)
-    
-    except Exception as e:
-        reporting.print_error_fetching(link_all, e)
-        return None, None
+    time.sleep(random.uniform(settings.MIN_DELAY, settings.MAX_DELAY))
+    detail_response = requests.get(link_all, headers=settings.HEADERS)
+    product_details_dict = parser.parse_product_details(detail_response.content)
     
     product_time = time.time() - product_start_time
     reporting.print_product_time(product_time)
@@ -39,35 +31,28 @@ def scrape_page(page_number):
     url = settings.BASE_URL + str(page_number)
     reporting.print_page_start(page_number)
     
-    try:
-        response = requests.get(url, headers=settings.HEADERS)
-        response.raise_for_status()
-        
-        products = parser.parse_product_list(response.content)
-        
-        for product in products:
-            product_name_clear, product_name_1_clear, original_price, product_links = parser.extract_product_info(product)
-            
-            for link in product_links:
-                link_all, product_details_dict = scrape_product(link)
-                
-                if link_all and product_details_dict:
-                    products_data = {
-                        "link": link_all,
-                        "brand": product_name_clear,
-                        "product": product_name_1_clear,
-                    }
-                    
-                    products_data.update(product_details_dict)
-                    page_data.append(products_data)
-                    products_on_page += 1
-                    price_display = product_details_dict.get("Price", "Not available")
-                    full_product_info = f"Brand: {product_name_clear}\nModel: {product_name_1_clear}\nPrice: {price_display}"
-                    reporting.print_product_scraped(full_product_info)
+    response = requests.get(url, headers=settings.HEADERS)
+    products = parser.parse_product_list(response.content)
     
-    except Exception as e:
-        reporting.print_error_processing_page(page_number, e)
-        return [], 0, 0
+    for product in products:
+        product_name_clear, product_name_1_clear, original_price, product_links = parser.extract_product_info(product)
+        
+        for link in product_links:
+            link_all, product_details_dict = scrape_product(link)
+            
+            if link_all and product_details_dict:
+                products_data = {
+                    "link": link_all,
+                    "brand": product_name_clear,
+                    "product": product_name_1_clear,
+                }
+                
+                products_data.update(product_details_dict)
+                page_data.append(products_data)
+                products_on_page += 1
+                price_display = product_details_dict.get("Price", "Not available")
+                full_product_info = f"Brand: {product_name_clear}\nModel: {product_name_1_clear}\nPrice: {price_display}"
+                reporting.print_product_scraped(full_product_info)
     
     page_time = time.time() - start_time_page
     reporting.print_page_complete(page_number, page_time, products_on_page)
@@ -152,7 +137,7 @@ def scrape():
     }
     
     df = df.rename(columns=lambda x: column_translations.get(x, x))
-    df = df.fillna("") # ------------------------------------------------------------- NaN to empty string
+    df = df.fillna("")
     
     stats = {
         'total_execution_time': total_execution_time,

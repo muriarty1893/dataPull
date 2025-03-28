@@ -14,14 +14,7 @@ def print_product_scraped(product_name):
 def print_page_complete(page_number, time_taken, product_count):
     print(f"Page {page_number} completed in {time_taken:.2f} seconds. Found {product_count} products.\n")
 
-def print_error_fetching(url, error):
-    print(f"Error fetching details for {url}: {error}")
-
-def print_error_processing_page(page_number, error):
-    print(f"Error processing page {page_number}: {error}")
-
 def print_timing_statistics(stats):
-
     total_time = stats['total_execution_time']
     page_times = stats['page_times']
     product_count = stats['product_count']
