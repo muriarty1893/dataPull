@@ -1,40 +1,37 @@
-# wip for laptops.
+# Trendyol Laptop Scraper
 
-# Trendyol Product Scraper
-
-A modular, well-structured scraper for collecting product details from Trendyol.com to be used for machine learning price prediction.
+A modular, well-structured scraper for collecting laptop details from Trendyol.com to be used for machine learning price prediction.
 
 ## Dataset Information
-- **Source**: Currently scrapes phones from [Trendyol](https://www.trendyol.com/cep-telefonu-x-c103498?pi=)
-- **Size**: 48 features and 4 meta (text) columns with depending number of lines according to your selection of the number pages to pull the data 
+- **Source**: Currently scrapes laptops from [Trendyol](https://www.trendyol.com/sr?wc=103108&lc=103108&qt=laptop&st=laptop&os=1)
+- **Size**: ~45+ features with detailed laptop specifications
 - **Output**: CSV format with English column headers and original data values
 
 ## Project Structure
 
 ```
 /
-├── README.md                   # Project documentation
-├── requirements.txt            # Project dependencies
-├── .gitignore                  # Git ignore rules
-├── scraper_project/            # Main project directory
-│   ├── main.py                 # Entry point script
-│   └── scraper/                # Main package
-│       ├── __init__.py         # Package initializer
-│       ├── core.py             # Core scraping functionality
-│       ├── parser.py           # HTML parsing functions
-│       ├── reporting.py        # Functions for printing messages and reports
-│       ├── utils.py            # Utility functions
-│       └── config/             # Configuration package
-│           ├── __init__.py     # Config package initializer
-│           └── settings.py     # Configurable settings (don't change the delay numbers!)
-└── output/                     # Directory for output CSV files (created after running the code)
-    └── trendyol_all_data.csv   # Scraped data output (created after running the code)
+├── README.md               # Project documentation
+├── requirements.txt        # Project dependencies
+├── .gitignore              # Git ignore rules
+├── scraper_project/        # Main project directory
+│   ├── main.py             # Entry point script
+│   └── scraper/            # Main package
+│       ├── __init__.py     # Package initializer
+│       ├── core.py         # Core scraping functionality
+│       ├── parser.py       # HTML parsing functions
+│       ├── reporting.py    # Functions for printing messages and reports
+│       └── config/         # Configuration package
+│           ├── __init__.py # Config package initializer
+│           └── settings.py # Configurable settings (don't change the delay numbers!)
+└── output/                 # Directory for output CSV files (created after running the code)
+    └── trendyol_laptops_data.csv  # Scraped data output (created after running the code)
 ```
 
 ## Features
 
 - Modular and maintainable code structure
-- Extracts product details into separate columns for machine learning
+- Extracts laptop details into separate columns for machine learning
 - Timing and performance measurement tools
 - Command-line interface for flexible usage
 - Error handling and reporting
@@ -75,16 +72,20 @@ You can adjust the following settings in `scraper_project/scraper/config/setting
 
 ## Output Data
 
-The scraper extracts various product details, including:
+The scraper extracts various laptop details, including:
 
 - Brand and model information
 - Price (in TL)
-- Storage capacity and RAM
-- Screen specifications (size, resolution, technology)
-- Camera details (front/rear, resolution)
-- Battery capacity
-- Connectivity features (NFC, Bluetooth, etc.)
-- And many other phone specifications
+- Processor type and generation
+- RAM capacity
+- Storage details (SSD/HDD capacity, type)
+- Screen specifications (size, resolution, panel type)
+- Graphics card and memory
+- Battery life
+- Connectivity features (USB, HDMI, Type-C, etc.)
+- Weight and dimensions
+- Keyboard and touchpad features
+- And many other laptop specifications
 
 Each feature is stored in its own column with English headers, making the data ready for machine learning applications.
 

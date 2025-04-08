@@ -31,11 +31,24 @@ def scrape_page(page_number):
     url = settings.BASE_URL + str(page_number)
     reporting.print_page_start(page_number)
     
+    if settings.DEBUG:
+        print(f"Requesting URL: {url}")
+    
     response = requests.get(url, headers=settings.HEADERS)
+    if settings.DEBUG:
+        print(f"Response status: {response.status_code}")
+        print(f"Response length: {len(response.content)} bytes")
+    
     products = parser.parse_product_list(response.content)
+    
+    if settings.DEBUG:
+        print(f"Found {len(products)} products on page {page_number}")
     
     for product in products:
         product_name_clear, product_name_1_clear, original_price, product_links = parser.extract_product_info(product)
+        
+        if settings.DEBUG:
+            print(f"Product: {product_name_clear} | {product_name_1_clear} | Links: {len(product_links)}")
         
         for link in product_links:
             link_all, product_details_dict = scrape_product(link)
@@ -88,52 +101,48 @@ def scrape():
         'Price': 'price',
         
         'Garanti Tipi': 'warranty_type',
-        'Dahili Hafıza': 'internal_storage',
-        'RAM Kapasitesi': 'ram_capacity',
-        'Ekran Boyutu': 'screen_size',
-        'Pil Gücü (mAh)': 'battery_power_mah',
-        'Mobil Bağlantı Hızı': 'mobile_connection_speed',
-        'Ön Kamera Çözünürlüğü': 'front_camera_resolution',
-        'Kamera Çözünürlüğü': 'camera_resolution',
-        'Ön Kamera Sayısı': 'front_camera_count',
-        'Ekran Çözünürlüğü': 'screen_resolution',
-        'Ekran Teknolojisi': 'screen_technology',
-        'Ön Kamera Çözünürlük Aralığı': 'front_camera_resolution_range',
-        'Görüntü Teknolojisi': 'display_technology',
-        'Ana Kamera Flaş': 'main_camera_flash',
-        'Ön Kamera Flaş': 'front_camera_flash',
-        'Ekran Cinsi': 'screen_type',
-        'Arka Kamera Sayısı': 'rear_camera_count',
-        'Ekran Boyut Aralığı': 'screen_size_range',
         'İşletim Sistemi': 'operating_system',
-        'Çift Hat': 'dual_sim',
-        'Kablosuz Şarj': 'wireless_charging',
-        'Yüz Tanıma': 'face_recognition',
-        'Dokunmatik Ekran': 'touchscreen',
+        'İşlemci Tipi': 'processor_type',
+        'İşlemci Nesli': 'processor_generation',
+        'RAM': 'ram',
+        'Disk Kapasitesi': 'storage_capacity',
+        'Disk Türü': 'storage_type',
+        'Ekran Boyutu': 'screen_size',
+        'Çözünürlük': 'screen_resolution',
+        'Ekran Kartı': 'graphics_card',
+        'Ekran Kartı Hafızası': 'graphics_memory',
+        'Ağırlık': 'weight',
         'Garanti Süresi': 'warranty_period',
-        'Şarj Girişi': 'charging_port',
-        'Ana Kamera Çözünürlük Aralığı': 'main_camera_resolution_range',
-        'NFC': 'nfc',
-        'Ekran Yenileme Hızı': 'screen_refresh_rate',
-        'Kulaklık Girişi': 'headphone_jack',
-        'Şarj Hızı': 'charging_speed',
-        'Arttırılabilir Hafıza (Hafıza Kartı Desteği)': 'expandable_storage',
-        'Batarya Kapasitesi Aralığı': 'battery_capacity_range',
+        'Bağlantı Özellikleri': 'connectivity',
+        'USB Sayısı': 'usb_ports',
+        'Batarya Ömrü': 'battery_life',
+        'Klavye': 'keyboard',
+        'Touchpad': 'touchpad',
+        'Kamera': 'camera',
         'Parmak İzi Okuyucu': 'fingerprint_reader',
-        'Suya/Toza Dayanıklılık': 'water_dust_resistance',
         'Renk': 'color',
-        'Yapay Zeka': 'artificial_intelligence',
-        'Video Kayıt Çözünürlüğü': 'video_recording_resolution',
         'Menşei': 'country_of_origin',
-        'Cep Telefonu Modeli': 'phone_model',
-        'Radio': 'radio',
-        'CPU Aralık': 'cpu_range',
-        'Görüntülü Konuşma': 'video_call',
-        'Kozmetik Durum': 'cosmetic_condition',
-        'Tamir Edilebilirlik': 'repairability',
-        'CE Uygunluk Sembolu': 'ce_compliance',
-        'İthalatçı/ Yetkili Temsilci/ İfa Hizmet Sağlayıcı': 'importer_representative',
-        'Üretici Bilgisi': 'manufacturer_info'
+        'Ürün Modeli': 'laptop_model',
+        'Disk Kapasitesi (GB)': 'storage_capacity_gb',
+        'Dokunmatik Ekran': 'touchscreen',
+        'Klavye Aydınlatması': 'keyboard_backlight',
+        'Şarj Girişi': 'charging_port',
+        'Ürün Adı': 'product_name',
+        'Hafıza Kapasitesi (GB)': 'ram_capacity_gb',
+        'Type-C': 'type_c_port',
+        'HDMI': 'hdmi',
+        'Ses Çıkışı': 'audio_port',
+        'Ön Kamera Çözünürlüğü': 'webcam_resolution',
+        'Pil Gücü (mAh)': 'battery_capacity_mah',
+        'Ekran Paneli': 'display_panel',
+        'Bluetooth': 'bluetooth',
+        'Wifi': 'wifi',
+        'Hoparlör': 'speakers',
+        'Kulaklık Girişi': 'headphone_jack',
+        'Yenilenme Hızı': 'refresh_rate',
+        'SSD Kapasitesi': 'ssd_capacity',
+        'HDD Kapasitesi': 'hdd_capacity',
+        'Ürün Tipi': 'product_type'
     }
     
     def rename_column(col_name):
