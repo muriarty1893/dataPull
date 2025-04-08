@@ -11,15 +11,12 @@ MAX_DELAY = 1.5 # dont touch this causes BAN
 OUTPUT_FILE = "trendyol_laptops_data.csv"
 OUTPUT_ENCODING = "utf-8"
 
-# HTML class names for product listing page
 PRODUCT_WRAPPER_CLASS = "p-card-wrppr"
 PRODUCT_CARD_BORDER_CLASS = "p-card-chldrn-cntnr"
 PRODUCT_DESC_CLASS = "prdct-desc-cntnr"
 PRODUCT_NAME_CLASS = "prdct-desc-cntnr-name hasRatings"
 PRICE_DISCOUNTED_CLASS = "prc-box-dscntd"
 PRICE_SELLING_CLASS = "prc-box-sllng"
-
-# HTML class names for product detail page
 SPECIFICATIONS_CONTAINER_CLASS = "detail-attr-container"
 SPECIFICATION_ITEM_CLASS = "detail-attr-item"
 PRODUCT_FEATURES_CLASS = "product-features"
