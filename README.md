@@ -1,3 +1,5 @@
+# wip for laptops.
+
 # Trendyol Product Scraper
 
 A modular, well-structured scraper for collecting product details from Trendyol.com to be used for machine learning price prediction.
