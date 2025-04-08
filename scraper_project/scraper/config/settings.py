@@ -7,6 +7,7 @@ HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
 
 MIN_DELAY = 0.5 # dont touch this causes BAN
 MAX_DELAY = 1.5 # dont touch this causes BAN
+# MAX_PAGE_DELAY = 10 # dont touch this causes BAN
 
 OUTPUT_FILE = "trendyol_laptops_data.csv"
 OUTPUT_ENCODING = "utf-8"
