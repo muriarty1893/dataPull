@@ -11,20 +11,20 @@ A modular, well-structured scraper for collecting laptop details from Trendyol.c
 
 ```
 /
-├── README.md               # Project documentation
-├── requirements.txt        # Project dependencies
-├── .gitignore              # Git ignore rules
-├── scraper_project/        # Main project directory
-│   ├── main.py             # Entry point script
-│   └── scraper/            # Main package
-│       ├── __init__.py     # Package initializer
-│       ├── core.py         # Core scraping functionality
-│       ├── parser.py       # HTML parsing functions
-│       ├── reporting.py    # Functions for printing messages and reports
-│       └── config/         # Configuration package
-│           ├── __init__.py # Config package initializer
-│           └── settings.py # Configurable settings (don't change the delay numbers!)
-└── output/                 # Directory for output CSV files (created after running the code)
+├── README.md                      # Project documentation
+├── requirements.txt               # Project dependencies
+├── .gitignore                     # Git ignore rules
+├── scraper_project/               # Main project directory
+│   ├── main.py                    # Entry point script
+│   └── scraper/                   # Main package
+│       ├── __init__.py            # Package initializer
+│       ├── core.py                # Core scraping functionality
+│       ├── parser.py              # HTML parsing functions
+│       ├── reporting.py           # Functions for printing messages and reports
+│       └── config/                # Configuration package
+│           ├── __init__.py        # Config package initializer
+│           └── settings.py        # Configurable settings (don't change the delay numbers!)
+└── output/                        # Directory for output CSV files (created after running the code)
     └── trendyol_laptops_data.csv  # Scraped data output (created after running the code)
 ```
 
