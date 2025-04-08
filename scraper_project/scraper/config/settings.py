@@ -9,7 +9,7 @@ MIN_DELAY = 0.5 # dont touch this causes BAN
 MAX_DELAY = 1.5 # dont touch this causes BAN
 # MAX_PAGE_DELAY = 10 # dont touch this causes BAN
 
-OUTPUT_FILE = "trendyol_laptops_data.csv"
+OUTPUT_FILE = "data.csv"
 OUTPUT_ENCODING = "utf-8"
 
 PRODUCT_WRAPPER_CLASS = "p-card-wrppr"
