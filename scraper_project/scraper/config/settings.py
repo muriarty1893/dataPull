@@ -1,6 +1,6 @@
 BASE_URL = "https://www.trendyol.com/laptop-x-c103108?pi="
 START_PAGE = 1
-END_PAGE = 1
+END_PAGE = 1 # ending page optional 
 DEBUG = True
 
 HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
