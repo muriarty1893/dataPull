@@ -3,14 +3,43 @@ from scraper_project.scraper.config import settings
 
 def parse_product_list(html_content):
     soup = BeautifulSoup(html_content, "html.parser", from_encoding="utf-8")
-    return soup.find_all("div", attrs={"class": settings.PRODUCT_WRAPPER_CLASS})
+    products = soup.find_all("div", attrs={"class": settings.PRODUCT_WRAPPER_CLASS})
+    
+    if settings.DEBUG:
+        print(f"HTML length: {len(html_content)}")
+        print(f"Found {len(products)} product wrappers with class: {settings.PRODUCT_WRAPPER_CLASS}")
+        
+        # Try a more direct selector if our normal one isn't working
+        alt_products = soup.select(".p-card-wrppr")
+        print(f"Alternative selector found: {len(alt_products)} products")
+        
+        if len(products) == 0 and len(alt_products) > 0:
+            print("Using alternative product selector")
+            return alt_products
+    
+    return products
 
 def extract_product_info(product):
+    if settings.DEBUG:
+        print(f"\nExtracting product info from element: {product.name} with classes: {product.get('class', 'no-class')}")
+    
+    # Get product name and model
     product_name = product.find("div", attrs={"class": settings.PRODUCT_DESC_CLASS})
     product_name_1 = product.find("span", attrs={"class": settings.PRODUCT_NAME_CLASS})
+    
+    if not product_name and not product_name_1:
+        # Try alternative selectors
+        product_name = product.select_one(".prdct-desc-cntnr")
+        product_name_1 = product.select_one(".prdct-desc-cntnr-name")
+    
     product_name_clear = product_name.text.strip() if product_name else None
     product_name_1_clear = product_name_1.text.strip() if product_name_1 else None
     
+    if settings.DEBUG:
+        print(f"Found product name: {product_name_clear}")
+        print(f"Found product model: {product_name_1_clear}")
+    
+    # Get product price
     original_price = None
     price_selectors = [
         ("div", {"class": settings.PRICE_DISCOUNTED_CLASS}),
@@ -27,17 +56,88 @@ def extract_product_info(product):
         price_element = product.find(tag, attrs=attrs)
         if price_element:
             original_price = price_element.text.strip()
+            if settings.DEBUG:
+                print(f"Found price: {original_price}")
             break
     
-    product_links = product.find_all("div", attrs={"class": settings.PRODUCT_CARD_BORDER_CLASS})
+    # For laptops, the link is directly on the product card or parent element
+    product_links = []
+    
+    # 1. Try to find the link directly on the product element
+    if product.name == "a" or product.find("a"):
+        product_links = [product]
+    else:
+        # 2. Try to find the link in a child element with proper class
+        product_card = product.find("div", attrs={"class": settings.PRODUCT_CARD_BORDER_CLASS})
+        if product_card:
+            product_links = [product_card]
+        else:
+            # 3. Look for any anchor tags
+            anchor_tags = product.find_all("a")
+            if anchor_tags:
+                product_links = [anchor_tags[0].parent]
+            else:
+                # 4. As a last resort, just use the product itself
+                product_links = [product]
+    
+    if settings.DEBUG:
+        print(f"Found {len(product_links)} links for product")
     
     return (product_name_clear, product_name_1_clear, original_price, product_links)
 
 def extract_product_link(link_element):
+    # Debug the input element
+    if settings.DEBUG:
+        print(f"Extracting link from: {link_element.name} with class: {link_element.get('class', 'no-class')}")
+    
+    # If the element itself is an anchor tag
+    if link_element.name == "a":
+        link = link_element.get("href")
+        if link:
+            if not link.startswith("http"):
+                link = f"https://www.trendyol.com{link}"
+            if settings.DEBUG:
+                print(f"Found direct link: {link}")
+            return link
+    
+    # Try to find the link in a child anchor element
     link_continue = link_element.find("a")
     if link_continue:
-        link_continue = link_continue.get("href")
-        return f"https://www.trendyol.com{link_continue}"
+        link = link_continue.get("href")
+        if link:
+            if not link.startswith("http"):
+                link = f"https://www.trendyol.com{link}"
+            if settings.DEBUG:
+                print(f"Found child link: {link}")
+            return link
+    
+    # Try to find any anchor tag inside the element
+    any_link = link_element.select_one("a")
+    if any_link:
+        link = any_link.get("href")
+        if link:
+            if not link.startswith("http"):
+                link = f"https://www.trendyol.com{link}"
+            if settings.DEBUG:
+                print(f"Found any link: {link}")
+            return link
+            
+    # Find the parent product card and try to get the link from there
+    parent_card = link_element.find_parent("div", class_=["p-card-wrppr", "product-card"])
+    if parent_card:
+        card_link = parent_card.find("a")
+        if card_link:
+            link = card_link.get("href")
+            if link:
+                if not link.startswith("http"):
+                    link = f"https://www.trendyol.com{link}"
+                if settings.DEBUG:
+                    print(f"Found parent card link: {link}")
+                return link
+    
+    if settings.DEBUG:
+        print(f"Could not find any link in element")
+    
     return None
 
 def parse_product_details(detail_html):
