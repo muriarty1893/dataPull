@@ -12,6 +12,7 @@ MAX_DELAY = 1.5 # dont touch this causes BAN
 OUTPUT_FILE = "data.csv"
 OUTPUT_ENCODING = "utf-8"
 
+# update these in case of link change
 PRODUCT_WRAPPER_CLASS = "p-card-wrppr"
 PRODUCT_CARD_BORDER_CLASS = "p-card-chldrn-cntnr"
 PRODUCT_DESC_CLASS = "prdct-desc-cntnr"
