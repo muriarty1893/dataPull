@@ -1,4 +1,4 @@
-# Trendyol Laptop Scraper
+# CEN 411 - Introduction to Data Mining Final Project Data Parser Code 
 
 A modular, well-structured scraper for collecting laptop details from Trendyol.com to be used for machine learning price prediction.
 
