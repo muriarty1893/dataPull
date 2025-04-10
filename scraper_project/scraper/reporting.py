@@ -12,7 +12,7 @@ def print_product_scraped(product_name):
     print(f"---\n{product_name}")
 
 def print_page_complete(page_number, time_taken, product_count):
-    print(f"Page {page_number} completed in {time_taken:.2f} seconds. Found {product_count} products.\n")
+    print(f"\nPage {page_number} completed in {time_taken:.2f} seconds. Found {product_count} products.\n")
 
 def print_timing_statistics(stats):
     total_time = stats['total_execution_time']
