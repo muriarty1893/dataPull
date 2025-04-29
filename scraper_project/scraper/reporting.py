@@ -20,7 +20,7 @@ def print_timing_statistics(stats):
     product_count = stats['product_count']
     column_count = stats['column_count']
     
-    print(f"\no========== TIMING STATISTICS ==========O")
+    print(f"\no========== TIMING STATISTICS ==========o")
     print(f"Total execution time: {total_time:.2f} seconds ({total_time/60:.2f} minutes)")
     
     if page_times:
