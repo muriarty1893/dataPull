@@ -45,3 +45,4 @@ myenv/
 *.swo
 
 /dev.md
+/process_price.py
