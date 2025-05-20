@@ -45,3 +45,9 @@ myenv/
 *.swo
 
 /dev.md
+/process_price.py
+/convert_numeric.py
+/consolidate_columns.py
+/find_duplicates.py
+/clean_duplicates.py
+/merge.py
