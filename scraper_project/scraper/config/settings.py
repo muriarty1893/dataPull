@@ -1,24 +1,20 @@
 BASE_URL = "https://www.trendyol.com/laptop-x-c103108?pi="
-START_PAGE = 1
-END_PAGE = 1  # Reduced to 1 page for faster scraping
 DEBUG = True
 
 HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
 
 # Minimum delay ayarları
-MIN_DELAY = 0.01  # Minimum delay
-MAX_DELAY = 0.02  # Maximum delay
+MIN_DELAY = 0.01
+MAX_DELAY = 0.02
 
 # Enable parallel processing
 USE_PARALLEL = True
-MAX_WORKERS = 5  # Paralel işlem sayısını artırdık
+MAX_WORKERS = 5
 
 # Data saving settings
-SAVE_INTERVAL = 10  # Save data every 10 products
-BACKUP_FILE = "data_backup.csv"  # Backup file for periodic saves
-AUTO_RECOVERY = True  # Enable auto recovery from last saved point
+SAVE_INTERVAL = 10  # Her 10 sayfada bir kaydet
+AUTO_RECOVERY = True
 
-OUTPUT_FILE = "data.csv"
 OUTPUT_ENCODING = "utf-8"
 
 PRODUCT_WRAPPER_CLASS = "p-card-wrppr"
