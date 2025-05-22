@@ -50,4 +50,4 @@ myenv/
 /consolidate_columns.py
 /find_duplicates.py
 /clean_duplicates.py
-/merge.py
+/merge_different_columns.py

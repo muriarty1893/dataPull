@@ -2,9 +2,28 @@ import time
 import random
 import requests
 import pandas as pd
+import os
 from scraper_project.scraper.config import settings
 from scraper_project.scraper import reporting
 from scraper_project.scraper import parser
+
+def save_backup(data, backup_file):
+    if not data:
+        return
+    
+    df = pd.DataFrame(data)
+    df.to_csv(backup_file, encoding=settings.OUTPUT_ENCODING, index=False)
+    if settings.DEBUG:
+        print(f"Backup saved to {backup_file}")
+
+def load_backup(backup_file):
+    if os.path.exists(backup_file):
+        try:
+            return pd.read_csv(backup_file, encoding=settings.OUTPUT_ENCODING).to_dict('records')
+        except Exception as e:
+            if settings.DEBUG:
+                print(f"Error loading backup: {e}")
+    return []
 
 def scrape_product(link_element):
     product_start_time = time.time()
@@ -79,6 +98,15 @@ def scrape():
     all_data = []
     product_count = 0
     
+    # Load backup if exists and auto recovery is enabled
+    if settings.AUTO_RECOVERY:
+        backup_data = load_backup(settings.BACKUP_FILE)
+        if backup_data:
+            all_data.extend(backup_data)
+            product_count = len(backup_data)
+            if settings.DEBUG:
+                print(f"Recovered {product_count} products from backup")
+    
     for page_number in range(settings.START_PAGE, settings.END_PAGE + 1):
         page_data, page_time, products_on_page = scrape_page(page_number)
         
@@ -86,6 +114,10 @@ def scrape():
             all_data.extend(page_data)
             page_times.append(page_time)
             product_count += products_on_page
+            
+            # Save backup periodically
+            if product_count % settings.SAVE_INTERVAL == 0:
+                save_backup(all_data, settings.BACKUP_FILE)
     
     total_execution_time = time.time() - start_time_total
     
@@ -93,6 +125,9 @@ def scrape():
     
     if 'originalPrice' in df.columns:
         df = df.drop('originalPrice', axis=1)
+    
+    # Save final backup
+    save_backup(all_data, settings.BACKUP_FILE)
     
     column_translations = {
         'link': 'link',
