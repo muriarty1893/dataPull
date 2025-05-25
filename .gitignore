@@ -8,6 +8,7 @@ __pycache__/
 
 # Output data files
 output/*.csv
+output/*.py
 combine_csv.py
 *.csv
 
